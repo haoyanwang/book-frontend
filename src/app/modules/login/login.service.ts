@@ -14,7 +14,7 @@ export class LoginService {
     private http: HttpClient
   ) { }
 
-  getVerifyCode(): Observable<any> {
+  getVerifyCode(): Observable<string> {
     return this.http.get(`${APIROOT}verifycode`, { responseType: 'text' });
   }
   validate(verifycode) {

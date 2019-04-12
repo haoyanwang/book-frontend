@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   reloadVerifyCode() {
-    this.loginService.getVerifyCode().subscribe((res: any) => {
+    this.loginService.getVerifyCode().subscribe(res => {
       this.base64Topng = this.sanitizer.bypassSecurityTrustResourceUrl(res);
     });
   }
