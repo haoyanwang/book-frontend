@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_ROOT: 'https://beta.maimemo.com/api/v2/admin/',
+  LOCAL_API_ROOT: 'http://127.0.0.1:5000/api/',
+  API_ROOT:'https://beta.maimemo.com/api/v2/admin/',
 };
 
 /*

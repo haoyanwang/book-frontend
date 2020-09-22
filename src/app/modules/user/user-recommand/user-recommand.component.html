@@ -1,0 +1,19 @@
+<div class="container">
+  <div *ngIf="firstTime" class="content-container">
+    <div>欢迎您来到由王皓衍制造开发的图书馆图书推荐系统后台😊~为了给您推荐更准确更合适的书籍，请做一些准备工作📕</div>
+    <div>当然您也可以前往本后台的书籍列表搜索您喜欢的书籍或者去排行榜参考参考其他人的兴趣爱好😜</div>
+  </div>
+  <div *ngIf="!firstTime" class="content-container">
+    <div class="title">推荐书籍</div>
+    <div *ngFor="let book of recommand" class="book">
+      <img [src]="book.img_url" (click)="bookDetail(book.book_id)" class="book-name">
+      <div (click)="bookDetail(book.book_id)" class="book-name">{{book.book_name}}</div>
+    </div>
+    <div class="title mt-64">随机推荐&nbsp;&nbsp;<i nz-icon nzType="reload" nzTheme="outline" (click)="getRandom()"  class="book-name"></i>&nbsp;<span (click)="getRandom()" class="book-name">换一批</span></div>
+    <div *ngFor="let book of randomRecommand" class="book">
+      <img [src]="book.img_url" (click)="bookDetail(book.book_id)" class="book-name">
+      <div (click)="bookDetail(book.book_id)" class="book-name">{{book.book_name}}</div>
+    </div>
+  </div>
+</div>
+<div id="mountNode"></div>

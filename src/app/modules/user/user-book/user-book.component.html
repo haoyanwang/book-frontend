@@ -1,0 +1,8 @@
+<h1>我的书架</h1>
+
+<nz-list [(nzDataSource)]="likeBookList" nzBordered [nzRenderItem]="item">
+  <ng-template #item let-item>
+    <ng-template #content><i nz-icon nzType="heart" nzTheme="fill" class="unlike-icon" (click)="unlike(item)"></i>{{item}}</ng-template>
+    <nz-list-item [nzContent]="content"></nz-list-item>
+  </ng-template>
+</nz-list>

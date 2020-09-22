@@ -1,3 +1,52 @@
 <div class="title">
-  目前主页啥也没有
+  <h1>欢迎来到图书馆图书推荐系统</h1>
+  <div style="width: 300px;text-align: center;display: inline-block;">
+    <nz-carousel nzAutoPlay>
+      <div *ngFor="let book of array" nz-carousel-content class="content">
+        <img [src]="book.img_url" (click)="bookDetail(book.book_id)" style="width:300px;height:300px;">
+      </div>
+    </nz-carousel>
+  </div>
+  <nz-alert nzType="info" nzMessage="欢迎您来到由王皓衍制造开发的图书馆图书推荐系统后台😊~为了给您推荐更准确更合适的书籍，请做一些准备工作📕" nzShowIcon></nz-alert>
+  <nz-alert nzType="info" nzMessage="当然您也可以前往本后台的书籍列表搜索您喜欢的书籍或者去排行榜参考参考其他人的兴趣爱好😜" nzShowIcon></nz-alert>
+</div>
+
+
+
+<div class="steps-container">
+  <nz-steps [nzCurrent]="current">
+    <nz-step nzTitle="选择您喜欢的类别"></nz-step>
+    <nz-step nzTitle="选择您喜欢的类别"></nz-step>
+    <nz-step nzTitle="选择您喜欢的书籍"></nz-step>
+  </nz-steps>
+  <div class="steps-content" *ngIf="current === 0">
+    <div class="selecet-container">
+      <nz-select style="width: 120px;" [(ngModel)]="t1Value" nzAllowClear nzPlaceHolder="选择您喜欢的类别">
+        <nz-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div class="steps-content" *ngIf="current === 1">
+    <div class="selecet-container">
+      <nz-select style="width: 220px;" [(ngModel)]="t2Value" nzAllowClear nzPlaceHolder="选择您喜欢的类别">
+        <nz-option *ngFor="let option of t1Options" [nzValue]="option" [nzLabel]="option"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+  <div class="steps-content" *ngIf="current === 2">
+    <div *ngFor="let book of bookList;let index = index" class="img-container">
+      <img [src]="book.img_url" class="book-img" (click)="bookDetail(book.book_id)">
+    </div>
+  </div>
+  <div class="steps-action">
+    <button nz-button nzType="default" (click)="pre()" *ngIf="current > 0">
+      <span>Previous</span>
+    </button>
+    <button nz-button nzType="default" (click)="next()" *ngIf="current < 2">
+      <span>Next</span>
+    </button>
+    <button nz-button nzType="default" (click)="done()" *ngIf="current === 2">
+      <span>Done</span>
+    </button>
+  </div>
 </div>

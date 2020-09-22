@@ -5,6 +5,8 @@ import { PagesRoutingModule } from './layout-routing.module';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { BookModule } from '../modules/book/book.module'
+import { UserModule } from '../modules/user/user.module'
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    DashboardModule
+    DashboardModule,
+    BookModule,
+    UserModule
   ],
   declarations: [
     LayoutComponent,

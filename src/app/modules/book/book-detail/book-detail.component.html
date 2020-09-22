@@ -1,0 +1,45 @@
+<nz-divider nzText="图书信息" nzOrientation="left"></nz-divider>
+<img [src]="book.img_url">
+<div class="container">
+  <div class="book-container">
+    名称：{{book.book_name}}
+  </div>
+  <div class="book-container">
+    分类：{{book.t1}} / {{book.t2}} / {{book.t3}}
+  </div>
+  <div class="book-container">
+    作者：
+    {{book.author}}
+  </div>
+  <div class="book-container">
+    描述：
+    {{book.description}}
+  </div>
+  <div class="book-container">
+    出版社：
+    {{book.press}}
+  </div>
+  <div class="book-container">
+    评分：
+    {{book.rate}}
+  </div>
+  <div class="book-container">
+    <i nz-icon nzType="heart" nzTheme="outline"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button nz-button nzType="primary" (click)="lease(book.book_name)">借阅书籍</button>
+  </div>
+</div>
+
+<nz-divider nzText="摘要" nzOrientation="left"></nz-divider>
+<p [innerHTML]="book.excerpt"></p>
+
+<nz-divider nzText="评论" nzOrientation="left"></nz-divider>
+<div *ngIf="book.comment.length === 0">暂无评论</div>
+<nz-comment *ngFor="let comment of book.comment" [nzAuthor]="comment.name" [nzDatetime]="comment.time">
+  <nz-avatar nz-comment-avatar nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
+  </nz-avatar>
+  <nz-comment-content>
+    <p>{{comment.content}}</p>
+  </nz-comment-content>
+  <nz-comment-action>回复</nz-comment-action>
+</nz-comment>
+<nz-divider nzText="推荐书籍" nzOrientation="left"></nz-divider>

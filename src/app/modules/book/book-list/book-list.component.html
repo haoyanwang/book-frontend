@@ -1,0 +1,83 @@
+<div class="search-bar-container">
+  <form nz-form [nzLayout]="'inline'" (ngSubmit)="loadBook()">
+    <nz-form-item>
+      <nz-form-label>请输入要搜索的书名</nz-form-label>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixUser">
+          <input nz-input [(ngModel)]="search_ipt" [ngModelOptions]="{standalone: true}" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>请选择图书分类</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="选择一个图书分类"
+          [(ngModel)]="optValue" [ngModelOptions]="{standalone: true}" (ngModelChange)="optionChange($event)">
+          <nz-option *ngFor="let option of options" [nzLabel]="option" [nzValue]="option"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">搜索</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+
+<div *ngFor="let book of listOfData" class="book-card-container">
+  <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionRead, actionHeart, actionLike]">
+    <nz-card-meta [nzTitle]="book.book_name" [nzDescription]="descriptionTemplate">
+    </nz-card-meta>
+  </nz-card>
+  <ng-template #descriptionTemplate>
+    <div>{{book.author}}</div>
+    <div>{{book.press}}</div>
+    <div>{{book.t1}}/{{book.t2}}/{{book.t3}}</div>
+    <div>{{book.rate}}</div>
+  </ng-template>
+  <ng-template #coverTemplate>
+    <img [alt]="book.book_name" [src]="book.img_url" class="book-img" />
+  </ng-template>
+  <ng-template #actionRead>
+    <i nz-icon nzType="read" nzTheme="outline" (click)="bookDetail(book.book_id)"></i>
+  </ng-template>
+  <ng-template #actionHeart>
+    <i nz-icon nzType="heart" nzTheme="outline" (click)="heart(book.book_name,true)"
+      *ngIf="likeBookList.indexOf(book.book_name) === -1"></i>
+    <i class="like-book" nz-icon nzType="heart" nzTheme="fill" (click)="heart(book.book_name,false)"
+      *ngIf="likeBookList.indexOf(book.book_name) !== -1"></i>
+  </ng-template>
+  <ng-template #actionLike>
+    <i nz-icon nzType="dollar" nzTheme="outline" (click)="lease(book.book_name)"></i>
+  </ng-template>
+</div>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="确认订单" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <div *ngIf="!leaseLoading">
+    <div class="line-container">书名：<span class="float-right">{{leaseBook}}</span></div>
+    <div class="line-container">数量：<span class="float-right">X 1</span></div>
+    <div class="line-container">时间：
+      <div class="float-right">
+        <nz-select style="width: 120px;" [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="借书时长">
+          <nz-option nzValue="1" nzLabel="1个月"></nz-option>
+          <nz-option nzValue="2" nzLabel="2个月"></nz-option>
+          <nz-option nzValue="3" nzLabel="3个月"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <div class="line-container">价格：<span class="float-right">￥{{selectedValue * 10}}</span></div>
+  </div>
+  <div *ngIf="leaseLoading">
+    <nz-steps [nzCurrent]="current" nzDirection="vertical">
+      <nz-step nzTitle="{{current === 0 ? '进行中' : current > 0 ? '已完成' : '等待' }}" nzDescription="正在确认订单信息"></nz-step>
+      <nz-step nzTitle="{{current === 1 ? '进行中' : current > 1 ? '已完成' : '等待' }}" nzDescription="检查图书库存"></nz-step>
+      <nz-step nzTitle="{{current === 2 ? '进行中' : current > 2 ? '已完成' : '等待' }}" nzDescription="检查余额"></nz-step>
+      <nz-step nzTitle="{{current === 3 ? '进行中' : current > 3 ? '已完成' : '等待' }}" nzDescription="生成订单"></nz-step>
+      <nz-step nzTitle="{{current === 4 ? '进行中' : current > 4 ? '已完成' : '等待' }}" nzDescription="请求服务器"></nz-step>
+    </nz-steps>
+  </div>
+</nz-modal>
+
+<div class="mt-12">
+  <nz-pagination [nzPageIndex]="1" [nzTotal]="cnt / 3" (nzPageIndexChange)="changeIndex($event)"></nz-pagination>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-layout',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route:Router
+  ) { }
 
   isCollapsed = false;
 
@@ -16,5 +19,14 @@ export class LayoutComponent implements OnInit {
 
   toggleCollapsed() {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  navigate(url) {
+    this.route.navigateByUrl(url)
+  }
+
+  logout() {
+    localStorage.removeItem('token')
+    this.route.navigateByUrl('admin/login')
   }
 }

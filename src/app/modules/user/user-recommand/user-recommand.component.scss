@@ -1,0 +1,23 @@
+.content-container {
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 24px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.book {
+    display: inline-block;
+    width: 20%;
+}
+
+.book-name {
+    cursor: pointer;
+    color: #007bff;
+}
+
+.mt-64 {
+    margin-top: 64px;
+}

@@ -1,0 +1,24 @@
+<nz-tabset>
+  <nz-tab nzTitle="借阅历史" (nzSelect)="getLeaseHistory()">
+    <div class="view-history-container">
+      <nz-timeline>
+        <nz-timeline-item *ngFor="let history of leaseHistory"><span>
+            <div class="expired-{{history.expired}} valid-{{history.valid}}">
+              <div class="cursor" (click)="viewDetail(history.book.book_id)">书名：{{history.book.book_name}}</div>
+              <div>借阅时间：{{history.lease_time | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+              <div>到期时间：{{history.end_time | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+            </div>
+            <div><button nz-button nzType="default" (click)="operate(history)">{{history.valid ? '还书' : '续借'}}</button></div>
+          </span></nz-timeline-item>
+      </nz-timeline>
+    </div>
+  </nz-tab>
+  <nz-tab nzTitle="浏览历史" (nzSelect)="getViewHistory()">
+    <div class="view-history-container">
+      <nz-timeline>
+        <nz-timeline-item *ngFor="let history of viewHistory"><span class="cursor"
+            (click)="viewDetail(history.book_id)">{{history.book_name}}</span></nz-timeline-item>
+      </nz-timeline>
+    </div>
+  </nz-tab>
+</nz-tabset>

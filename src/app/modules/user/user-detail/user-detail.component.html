@@ -1,0 +1,92 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">头像</nz-form-label>
+    <nz-avatar
+    [nzText]="username"
+    nzSize="large"
+    [ngStyle]="{ 'background-color': '#f56a00' }"
+    style="vertical-align: middle;"
+  ></nz-avatar>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username">用户名</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="username" id="username" disabled />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname">昵称</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="nickname" id="nickname" />
+      <nz-form-explain *ngIf="validateForm.get('nickname')?.dirty && validateForm.get('nickname')?.errors">
+        昵称不能为空
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email">邮箱</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input formControlName="email" id="email" />
+      <nz-form-explain *ngIf="validateForm.get('email')?.dirty && validateForm.get('email')?.errors">
+        不是合法邮箱
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="birthday">出生日期</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-date-picker formControlName="birthday"></nz-date-picker>
+      <nz-form-explain *ngIf="validateForm.get('birthday')?.dirty && validateForm.get('birthday')?.errors">
+        出生日期不能为空
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="sex">性别</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-radio-group formControlName="sex">
+        <label nz-radio nzValue="male">男</label>
+        <label nz-radio nzValue="female">女</label>
+      </nz-radio-group>
+      <nz-form-explain *ngIf="validateForm.get('sex')?.dirty && validateForm.get('sex')?.errors">
+        性别不能为空
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="college">学院</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-select style="width: 200px;" formControlName="college" nzAllowClear>
+        <nz-option nzValue="1" nzLabel="机电工程学院"></nz-option>
+        <nz-option nzValue="2" nzLabel="机械工程学院"></nz-option>
+        <nz-option nzValue="3" nzLabel="材料科学与工程学院"></nz-option>
+        <nz-option nzValue="4" nzLabel="化学工程与与技术学院"></nz-option>
+        <nz-option nzValue="5" nzLabel="信息与通信工程学院"></nz-option>
+        <nz-option nzValue="6" nzLabel="仪器与电子学院"></nz-option>
+        <nz-option nzValue="7" nzLabel="大数据学院"></nz-option>
+        <nz-option nzValue="8" nzLabel="理学院"></nz-option>
+        <nz-option nzValue="9" nzLabel="经管学院"></nz-option>
+        <nz-option nzValue="10" nzLabel="人文社会科学学院"></nz-option>
+        <nz-option nzValue="11" nzLabel="体育学院"></nz-option>
+        <nz-option nzValue="12" nzLabel="艺术学院"></nz-option>
+        <nz-option nzValue="13" nzLabel="软件学院"></nz-option>
+        <nz-option nzValue="14" nzLabel="环境与安全工程学院"></nz-option>
+        <nz-option nzValue="15" nzLabel="电器与控制工程学院"></nz-option>
+        <nz-option nzValue="16" nzLabel="能源动力学院"></nz-option>
+        <nz-option nzValue="17" nzLabel="研究生学院"></nz-option>
+        <nz-option nzValue="18" nzLabel="国际教育学院"></nz-option>
+        <nz-option nzValue="19" nzLabel="继续教育学院"></nz-option>
+        <nz-option nzValue="20" nzLabel="国防教育学院"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="validateForm.get('college')?.dirty && validateForm.get('college')?.errors">
+        学院不能为空
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24">确认</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <button nz-button nzType="primary">保存</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
